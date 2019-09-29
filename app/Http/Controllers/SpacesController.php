@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Spaces;
 class SpacesController extends Controller
 {
 
-       // $this->middleware('auth:admin', ['except' => ['index','show']]);
+       // $this->middleware('auth:admin', );
   
     public function __construct() {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin',['except' => ['index','show']]);
     }
     /**
      * Display a listing of the resource.
@@ -31,6 +32,7 @@ class SpacesController extends Controller
     public function create()
     {
         //
+        return view('spaces.create');
     }
 
     /**
@@ -42,6 +44,17 @@ class SpacesController extends Controller
     public function store(Request $request)
     {
         //
+        $space = new Spaces();
+        $space->name = $request->input('name');
+        $space->number = $request->input('number');
+        $space->description = $request->input('description');
+        $space->localization = $request->input('localization');
+        $path = $request->file('photo')->store('images','public');
+        $space->photo = $path;
+        $space->type = $request->input('type');
+        $space->size = $request->input('size');
+        $space->save();
+        return redirect('spaces/');
     }
 
     /**
@@ -64,6 +77,11 @@ class SpacesController extends Controller
     public function edit($id)
     {
         //
+        $space = Spaces::find($id);
+        if(isset($space)){
+            return view('spaces.edit',compact('space'));
+        }
+        return redirect('spaces/');
     }
 
     /**
@@ -75,7 +93,16 @@ class SpacesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $space = Spaces::find($id);
+        if(isset($space)){
+            $space->name = $request->input('name');
+            $space->number = $request->input('number');
+            $space->description = $request->input('description');
+            $space->save();
+        }
+        
+        
+        return redirect('spaces/');
     }
 
     /**
@@ -86,6 +113,12 @@ class SpacesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $space = Spaces::find($id);
+        if(isset($space)){
+            $photo = $space->photo;
+            Storage::disk('public')->delete($photo);
+            $space->delete();
+        }
+        return redirect('spaces/');
     }
 }
