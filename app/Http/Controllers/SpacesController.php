@@ -11,7 +11,7 @@ class SpacesController extends Controller
        // $this->middleware('auth:admin', );
   
     public function __construct() {
-        $this->middleware('auth:admin',['except' => ['index','show']]);
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -65,7 +65,11 @@ class SpacesController extends Controller
      */
     public function show($id)
     {
-        //
+        $space= Spaces::find($id);
+        if(isset($space)){
+            return view('spaces.show',compact('space'));
+        }
+        return view('spaces/');
     }
 
     /**

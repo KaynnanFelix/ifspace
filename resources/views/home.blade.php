@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Acesse a conta admin com:
+                    Email: admin@admin.com
+                    Senha: admin1234
                 </div>
             </div>
         </div>

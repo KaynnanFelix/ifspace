@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use App\Reservations;
+use App\Spaces;
+use App\Http\Controllers\SpacesController;
 class ReservationsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,8 @@ class ReservationsController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservations::all();
+        return view('reservations.index', compact(['reservations']));
     }
 
     /**
@@ -23,7 +31,8 @@ class ReservationsController extends Controller
      */
     public function create()
     {
-        //
+        $spaces = Spaces::all();
+        return view('reservations.create',compact(['spaces']));
     }
 
     /**
@@ -34,7 +43,12 @@ class ReservationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservations = new Reservations();
+        $reservations->period = $request->input('period');
+        $reservations->space = $request->input('space');
+        $reservations->name = $request->input('name');
+        $reservations->save();
+        return redirect('reservations/');
     }
 
     /**

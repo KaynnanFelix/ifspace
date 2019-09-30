@@ -89,13 +89,11 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Reservar</a>
-                    <a href="https://laravel.com/docs">Consultar</a>
+
                     @guest
                     <a href="https://laravel.com/docs">Cadastrar</a>
                     @endguest
                     <a href="https://github.com/KaynnanFelix/ifspace">GitHub</a>
-                    <a href="https://laravel.com/docs">Sobre</a>
                 </div>
             </div>
         </div>

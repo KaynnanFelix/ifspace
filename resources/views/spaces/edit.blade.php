@@ -22,6 +22,8 @@
                             <label for="description">Descrição</label>
                             <textarea class="form-control" id="description" name="description" rows="3" placeholder="Ex.: Laboratório de informática com 20 computadores, contendo as ferramentas necessárias para desenvolvimento web como XAMPP, VS Code, Laravel, etc., além de ter projetor.">{{$space->description}}</textarea>
                         </div>
+                        <p>Tamanho: {{$space->size}}</p>
+                        <p>Tipo: {{$space->type}}</p>
                         <p>
                             <button type="submit" class="btn btn-primary my-2">Salvar</button>
                         </p>

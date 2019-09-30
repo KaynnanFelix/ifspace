@@ -11,7 +11,7 @@
           <h5 class="card-title">{{$space->number}} - {{$space->name}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{$space->type}}</h6>
           <p class="card-text">{{$space->description}}</p>
-          <a href="#" class="btn btn-primary">Visualizar</a>
+          <a href="{{route('spaces.show', $space['id'])}}" class="btn btn-primary">Visualizar</a>
           @auth('admin')
           <a href="{{route('spaces.edit', $space['id'])}}" class="btn btn-primary">Editar</a>
         <form method="POST" action="spaces/{{$space->id}}">
