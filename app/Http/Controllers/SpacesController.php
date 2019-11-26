@@ -11,7 +11,7 @@ class SpacesController extends Controller
        // $this->middleware('auth:admin', );
   
     public function __construct() {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('indexAPI');
     }
     /**
      * Display a listing of the resource.
@@ -22,6 +22,12 @@ class SpacesController extends Controller
     {
         $spaces = Spaces::all();
         return view('spaces.index', compact(['spaces']));
+    }
+
+    public function indexAPI()
+    {
+        $spaces = Spaces::all();
+        return $spaces->toJson();
     }
 
     /**

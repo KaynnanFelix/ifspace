@@ -17,4 +17,9 @@ class AdminController extends Controller
         $reservations = Reservations::all();
         return view('admin',compact(['reservations']));
     }
+
+    public function profile(){
+
+        return view('profile');
+    }
 }

@@ -11,7 +11,7 @@ class ReservationsController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('indexAPI');
     }
     /**
      * Display a listing of the resource.
@@ -22,6 +22,12 @@ class ReservationsController extends Controller
     {
         $reservations = Reservations::all();
         return view('reservations.index', compact(['reservations']));
+    }
+
+    public function indexAPI()
+    {
+        $reservations = Reservations::all();
+        return $reservations->toJson();
     }
 
     /**
@@ -43,8 +49,11 @@ class ReservationsController extends Controller
      */
     public function store(Request $request)
     {
+        $value2 = $request->input('space');
+        $value1 = $request->input('period');
+        $value = $value1.$value2;
         $reservations = new Reservations();
-        $reservations->period = $request->input('period');
+        $reservations->period = $value;
         $reservations->space = $request->input('space');
         $reservations->name = $request->input('name');
         $reservations->save();

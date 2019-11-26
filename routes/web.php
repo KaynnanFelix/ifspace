@@ -26,3 +26,5 @@ Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.logi
 
 Route::resource('spaces', 'SpacesController');
 Route::resource('reservations', 'ReservationsController');
+
+Route::get('admin/profile', 'AdminController@profile');

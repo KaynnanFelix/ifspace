@@ -18,15 +18,17 @@
                                 <select class="form-control" id="space" name="space">
                                     @foreach ($spaces as $space)
                                 <option value="Nome:{{$space->name}} Número:{{$space->number}} Localização:{{$space->localization}}">{{$space->name.'-'.$space->number}}</option>
+                                    
                                     @endforeach
                                 </select>
                             </div>
+                            
                         <div class="form-group">
                             <label for="size">Período</label>
                             <select class="form-control" id="period" name="period">
-                            <option value="{{Carbon\Carbon::now()->toDateString()}}-Matutino">Matutino</option>
-                                <option value="{{Carbon\Carbon::now()->toDateString()}}-Vespertino">Vespertino</option>
-                                <option value="{{Carbon\Carbon::now()->toDateString()}}-Noturno">Noturno</option>
+                                <option value="{{Carbon\Carbon::now()->toDateString()}}-Matutino-">Matutino</option>
+                                <option value="{{Carbon\Carbon::now()->toDateString()}}-Vespertino-">Vespertino</option>
+                                <option value="{{Carbon\Carbon::now()->toDateString()}}-Noturno-">Noturno</option>
                             </select>
                         </div>
                         <p>
